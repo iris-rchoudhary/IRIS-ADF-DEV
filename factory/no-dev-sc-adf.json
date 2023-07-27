@@ -1,0 +1,9 @@
+{
+	"name": "no-dev-sc-adf",
+	"location": "southcentralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "93c378fa-95ba-44a0-9c3e-e18aaae5891f",
+		"tenantId": "e0d21cb3-860e-4c0f-9c20-ef1b7466a95c"
+	}
+}
