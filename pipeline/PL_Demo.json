@@ -25,7 +25,11 @@
 				"inputs": [
 					{
 						"referenceName": "DS_IRIS",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Schema": "dbo",
+							"Table": "Store"
+						}
 					}
 				]
 			}
