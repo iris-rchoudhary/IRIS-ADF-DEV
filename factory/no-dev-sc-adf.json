@@ -2,8 +2,14 @@
 	"name": "no-dev-sc-adf",
 	"location": "southcentralus",
 	"identity": {
-		"type": "SystemAssigned",
+		"type": "SystemAssigned,UserAssigned",
 		"principalId": "93c378fa-95ba-44a0-9c3e-e18aaae5891f",
-		"tenantId": "e0d21cb3-860e-4c0f-9c20-ef1b7466a95c"
+		"tenantId": "e0d21cb3-860e-4c0f-9c20-ef1b7466a95c",
+		"userAssignedIdentities": {
+			"/subscriptions/6dfb60d5-ab14-4ec8-b541-b44c61058d21/resourcegroups/no-iris-web-dev-sc-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/no-iris-web-dev-mi": {
+				"clientId": "bce7592d-c2d6-4208-bd2a-dd6dbcc93087",
+				"principalId": "4b5bc699-9ec0-4c2b-a812-a99fa239f80b"
+			}
+		}
 	}
 }
