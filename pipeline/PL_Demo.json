@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy_Data_AllProducts_Byod_to_Iris",
+				"description": "Copy \"AllProducts\" data from Byod to Iris ",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -34,6 +35,12 @@
 				]
 			}
 		],
+		"variables": {
+			"V_TableName": {
+				"type": "String",
+				"defaultValue": "AllProducts"
+			}
+		},
 		"annotations": []
 	}
 }
