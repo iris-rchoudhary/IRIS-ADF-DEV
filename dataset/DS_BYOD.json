@@ -1,0 +1,30 @@
+{
+	"name": "DS_BYOD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURE_SQL_BYOD",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_TableName": {
+				"type": "string"
+			},
+			"DS_SchemaName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().DS_SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().DS_TableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
