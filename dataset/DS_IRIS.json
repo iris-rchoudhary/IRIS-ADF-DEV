@@ -1,0 +1,31 @@
+{
+	"name": "DS_IRIS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURE_SQL_IRIS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_SchemaName": {
+				"type": "string",
+				"defaultValue": " "
+			},
+			"DS_TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().DS_SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().DS_TableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
