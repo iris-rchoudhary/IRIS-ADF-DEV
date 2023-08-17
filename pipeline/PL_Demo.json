@@ -21,19 +21,41 @@
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_IRIS",
+						"referenceName": "DS_BYOD",
 						"type": "DatasetReference",
 						"parameters": {
-							"Schema": {
-								"value": "@pipeline().globalParameters.SourceSchemaName",
+							"DS_TableName": {
+								"value": "@variables('V_SourceTableName')",
 								"type": "Expression"
 							},
-							"Table": "Store"
+							"DS_SchemaName": {
+								"value": "@pipeline().globalParameters.SourceSchemaName",
+								"type": "Expression"
+							}
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_BYOD",
+						"type": "DatasetReference"
 					}
 				]
 			}
