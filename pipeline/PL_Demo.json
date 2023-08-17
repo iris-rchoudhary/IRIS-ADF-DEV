@@ -27,11 +27,9 @@
 							"value": "@{concat(' DROP TABLE ',pipeline().globalParameters.TargetSchemaName,'.',variables('V_TargetTableName'))}",
 							"type": "Expression"
 						},
-						"writeBehavior": "upsert",
-						"upsertSettings": {
-							"useTempDB": true
-						},
+						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
+						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
