@@ -1,5 +1,13 @@
 {
 	"name": "no-dev-sc-adf",
+	"properties": {
+		"globalParameters": {
+			"SourceSchemaName": {
+				"type": "string",
+				"value": "dbo"
+			}
+		}
+	},
 	"location": "southcentralus",
 	"identity": {
 		"type": "SystemAssigned",
