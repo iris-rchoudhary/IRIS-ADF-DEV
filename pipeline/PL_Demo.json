@@ -23,8 +23,16 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"preCopyScript": {
+							"value": "@{concat(' DROP TABLE ',pipeline().globalParameters.TargetSchemaName,'.',variables('V_TargetTableName'))}",
+							"type": "Expression"
+						},
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true
+						},
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -54,8 +62,18 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_BYOD",
-						"type": "DatasetReference"
+						"referenceName": "DS_IRIS",
+						"type": "DatasetReference",
+						"parameters": {
+							"DS_SchemaName": {
+								"value": "@pipeline().globalParameters.TargetSchemaName",
+								"type": "Expression"
+							},
+							"DS_TableName": {
+								"value": "@variables('V_TargetTableName')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
