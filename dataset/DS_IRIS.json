@@ -6,11 +6,11 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"Schema": {
+			"DS_SchemaName": {
 				"type": "string",
 				"defaultValue": " "
 			},
-			"Table": {
+			"DS_TableName": {
 				"type": "string"
 			}
 		},
