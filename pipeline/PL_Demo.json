@@ -28,7 +28,10 @@
 						"referenceName": "DS_IRIS",
 						"type": "DatasetReference",
 						"parameters": {
-							"Schema": "dbo",
+							"Schema": {
+								"value": "@pipeline().globalParameters.SourceSchemaName",
+								"type": "Expression"
+							},
 							"Table": "Store"
 						}
 					}
@@ -36,9 +39,13 @@
 			}
 		],
 		"variables": {
-			"V_TableName": {
+			"V_SourceTableName": {
 				"type": "String",
 				"defaultValue": "AllProducts"
+			},
+			"V_TargetTableName": {
+				"type": "String",
+				"defaultValue": "Byod_AllProducts"
 			}
 		},
 		"annotations": []
