@@ -1,0 +1,64 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "no-dev-sc-adf"
+		},
+		"LS_AZURE_SQL_BYOD_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_BYOD'"
+		},
+		"LS_AZURE_SQL_IRIS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_IRIS'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
+		},
+		"LS_Azure_SQL_ZeusDev_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Azure_SQL_ZeusDev'"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "no-dev-sc-adf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_AZURE_SQL_BYOD_connectionString": {
+						"value": "[parameters('LS_AZURE_SQL_BYOD_connectionString')]"
+					},
+					"LS_AZURE_SQL_IRIS_connectionString": {
+						"value": "[parameters('LS_AZURE_SQL_IRIS_connectionString')]"
+					},
+					"LS_Azure_SQL_ZeusDev_connectionString": {
+						"value": "[parameters('LS_Azure_SQL_ZeusDev_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

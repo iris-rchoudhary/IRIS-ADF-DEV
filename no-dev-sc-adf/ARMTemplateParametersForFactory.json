@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "no-dev-sc-adf"
+		},
+		"LS_AZURE_SQL_BYOD_connectionString": {
+			"value": ""
+		},
+		"LS_AZURE_SQL_IRIS_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
+		},
+		"LS_Azure_SQL_ZeusDev_connectionString": {
+			"value": ""
+		}
+	}
+}
