@@ -2,7 +2,7 @@
 	"name": "ds_iris",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZURE_SQL_IRIS",
+			"referenceName": "LS_IRIS_SQL",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
