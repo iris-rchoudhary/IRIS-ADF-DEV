@@ -1,5 +1,5 @@
 {
-	"name": "PL_Load_AllProducts_ToIRIS",
+	"name": "PL_Load_AllProducts_To_IRIS",
 	"properties": {
 		"activities": [
 			{
