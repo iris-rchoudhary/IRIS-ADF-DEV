@@ -1,0 +1,12 @@
+{
+	"name": "ds_byod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURE_SQL_BYOD",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
