@@ -6,7 +6,7 @@
 		"typeProperties": {
 			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris",
 			"credential": {
-				"referenceName": "iris_cred",
+				"referenceName": "iris_credentials",
 				"type": "CredentialReference"
 			}
 		},
