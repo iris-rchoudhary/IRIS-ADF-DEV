@@ -1,1 +1,10 @@
-{}
+{
+	"SourceSchemaName": {
+		"type": "string",
+		"value": "dbo"
+	},
+	"TargetSchemaName": {
+		"type": "string",
+		"value": "stg"
+	}
+}
