@@ -1,5 +1,5 @@
 {
-	"name": "PL_Demo_Pipeline_copy1",
+	"name": "PL_Load_AllProducts_ToIRIS",
 	"properties": {
 		"activities": [
 			{
