@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select top 10 * from dbo.AllProducts",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
