@@ -8,11 +8,11 @@
 		"LS_AZURE_SQL_BYOD_connectionString": {
 			"value": ""
 		},
-		"LS_AZURE_SQL_IRIS_connectionString": {
-			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
-		},
 		"LS_Azure_SQL_ZeusDev_connectionString": {
 			"value": ""
+		},
+		"LS_IRIS_SQL_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
 		}
 	}
 }

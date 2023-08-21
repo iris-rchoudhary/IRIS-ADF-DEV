@@ -11,14 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_BYOD'"
 		},
-		"LS_AZURE_SQL_IRIS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_IRIS'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
-		},
 		"LS_Azure_SQL_ZeusDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_Azure_SQL_ZeusDev'"
+		},
+		"LS_IRIS_SQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_IRIS_SQL'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
 		}
 	},
 	"variables": {
@@ -82,6 +82,53 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/iris_credentials')]",
+			"type": "Microsoft.DataFactory/factories/credentials",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "ManagedIdentity",
+				"typeProperties": {
+					"resourceId": "/subscriptions/6dfb60d5-ab14-4ec8-b541-b44c61058d21/resourcegroups/no-iris-web-dev-sc-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/no-iris-web-dev-mi"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_byod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZURE_SQL_BYOD",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"SchemaName": {
+						"type": "string"
+					},
+					"TableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SchemaName",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZURE_SQL_BYOD')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/adf-azure-ir')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -108,30 +155,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZURE_SQL_IRIS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('LS_AZURE_SQL_IRIS_connectionString')]",
-					"credential": {
-						"referenceName": "iris_cred",
-						"type": "CredentialReference"
-					}
-				},
-				"connectVia": {
-					"referenceName": "adf-azure-ir",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/adf-azure-ir')]",
-				"[concat(variables('factoryId'), '/credentials/iris_cred')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/LS_Azure_SQL_ZeusDev')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -148,6 +171,140 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/adf-azure-ir')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_IRIS_SQL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_IRIS_SQL_connectionString')]",
+					"credential": {
+						"referenceName": "iris_credentials",
+						"type": "CredentialReference"
+					}
+				},
+				"connectVia": {
+					"referenceName": "adf-azure-ir",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/adf-azure-ir')]",
+				"[concat(variables('factoryId'), '/credentials/iris_credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_iris')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_IRIS_SQL",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"schema": {
+						"type": "string"
+					},
+					"table": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_IRIS_SQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_Load_AllProducts_To_IRIS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyData_AllProduts_From Byod_To_IRIS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select top 10 * from dbo.AllProducts",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_byod",
+								"type": "DatasetReference",
+								"parameters": {
+									"SchemaName": "dbo",
+									"TableName": "AllProducts"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_iris",
+								"type": "DatasetReference",
+								"parameters": {
+									"schema": "stg",
+									"table": "AllProducts"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_byod')]",
+				"[concat(variables('factoryId'), '/datasets/ds_iris')]"
 			]
 		}
 	]

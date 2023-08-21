@@ -11,14 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_BYOD'"
 		},
-		"LS_AZURE_SQL_IRIS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_IRIS'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
-		},
 		"LS_Azure_SQL_ZeusDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_Azure_SQL_ZeusDev'"
+		},
+		"LS_IRIS_SQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_IRIS_SQL'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=no-iris-dev-sc-sqldb.database.windows.net;Initial Catalog=iris"
 		},
 		"containerUri": {
 			"type": "string",
@@ -50,11 +50,11 @@
 					"LS_AZURE_SQL_BYOD_connectionString": {
 						"value": "[parameters('LS_AZURE_SQL_BYOD_connectionString')]"
 					},
-					"LS_AZURE_SQL_IRIS_connectionString": {
-						"value": "[parameters('LS_AZURE_SQL_IRIS_connectionString')]"
-					},
 					"LS_Azure_SQL_ZeusDev_connectionString": {
 						"value": "[parameters('LS_Azure_SQL_ZeusDev_connectionString')]"
+					},
+					"LS_IRIS_SQL_connectionString": {
+						"value": "[parameters('LS_IRIS_SQL_connectionString')]"
 					}
 				}
 			},
