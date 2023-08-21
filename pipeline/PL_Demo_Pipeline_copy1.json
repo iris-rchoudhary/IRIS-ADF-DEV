@@ -47,7 +47,11 @@
 				"outputs": [
 					{
 						"referenceName": "ds_iris",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "AllProducts"
+						}
 					}
 				]
 			}
