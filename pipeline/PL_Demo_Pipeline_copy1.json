@@ -41,7 +41,11 @@
 				"inputs": [
 					{
 						"referenceName": "ds_byod",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "AllProducts"
+						}
 					}
 				],
 				"outputs": [
