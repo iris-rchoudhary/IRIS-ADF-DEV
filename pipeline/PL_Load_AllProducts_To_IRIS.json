@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "CopyData_AllProduts_From Byod_To_IRIS",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
