@@ -23,10 +23,6 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": {
-							"value": "@{concat(' DROP TABLE ',pipeline().globalParameters.TargetSchemaName,'.',variables('V_TargetTableName'))}",
-							"type": "Expression"
-						},
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"tableOption": "autoCreate",
