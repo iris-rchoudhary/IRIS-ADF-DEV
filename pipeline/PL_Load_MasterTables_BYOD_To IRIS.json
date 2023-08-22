@@ -210,12 +210,12 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ProductGroupId",
+									"name": "ManufacturerCode",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "ProductGroup",
+									"name": "ManufacturerCode",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
