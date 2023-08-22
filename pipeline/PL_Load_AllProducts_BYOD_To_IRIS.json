@@ -23,7 +23,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "delete from stg.AllProducts",
+						"preCopyScript": "delete from stg.Byod_AllProducts",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
@@ -1120,7 +1120,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": "stg",
-							"table": "AllProducts"
+							"table": "Byod_AllProducts"
 						}
 					}
 				]
