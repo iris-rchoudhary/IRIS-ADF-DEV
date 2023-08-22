@@ -193,12 +193,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"additionalColumns": [
-							{
-								"name": "MNFDescription",
-								"value": "$$COLUMN:ManufacturerCode"
-							}
-						],
 						"sqlReaderQuery": "SELECT DISTINCT ManufacturerCode FROM dbo.AllPRoducts\nWHERE ManufacturerCode  <>''  ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
