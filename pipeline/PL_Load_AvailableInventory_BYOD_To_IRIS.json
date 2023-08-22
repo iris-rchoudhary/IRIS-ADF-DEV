@@ -17,13 +17,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select  * from dbo.AllProducts",
+						"sqlReaderQuery": "select  * from dbo.AvailableInventory",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "delete from stg.AllProducts",
+						"preCopyScript": "delete from stg.Byod_AvailableInventory",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
@@ -1110,7 +1110,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "dbo",
-							"TableName": "AllProducts"
+							"TableName": "AvailableInventory"
 						}
 					}
 				],
@@ -1120,7 +1120,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": "stg",
-							"table": "AllProducts"
+							"table": "Byod_AvailableInventory"
 						}
 					}
 				]
