@@ -248,6 +248,85 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy_BrandCode_From Byod_To_IRIS",
+				"description": "Load Brand Code from Byod to IRIS database",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy_MNFCode_From Byod_To_IRIS_copy1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT DISTINCT BRANDCODE FROM dbo.AllPRoducts\nWHERE BRANDCODE  <>'' ",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "delete from stg.Byod_BrandCode",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ManufacturerCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ManufacturerCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_byod",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "AllProducts"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "Byod_BrandCode"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
