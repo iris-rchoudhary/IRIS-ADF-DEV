@@ -92,7 +92,7 @@
 				]
 			},
 			{
-				"name": "Copy_ProductGroupID_From Byod_To_IRIS_copy1",
+				"name": "Copy_ProductGroupID_From Byod_To_IRIS",
 				"description": "Load ProductGroupID from Byod to IRIS database",
 				"type": "Copy",
 				"dependsOn": [
@@ -171,12 +171,12 @@
 				]
 			},
 			{
-				"name": "Copy_MNFCode_From Byod_To_IRIS_copy1_copy1",
+				"name": "Copy_MNFCode_From Byod_To_IRIS",
 				"description": "Load Manufacturer Code from Byod to IRIS database",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy_ProductGroupID_From Byod_To_IRIS_copy1",
+						"activity": "Copy_ProductGroupID_From Byod_To_IRIS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -255,7 +255,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy_MNFCode_From Byod_To_IRIS_copy1_copy1",
+						"activity": "Copy_MNFCode_From Byod_To_IRIS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -289,12 +289,12 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ManufacturerCode",
+									"name": "BRANDCODE",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "ManufacturerCode",
+									"name": "BrandCode",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
