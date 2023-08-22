@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CopyData_AllProduts_From Byod_To_IRIS",
+				"name": "CopyData_AvlInv_From Byod_To_IRIS",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
