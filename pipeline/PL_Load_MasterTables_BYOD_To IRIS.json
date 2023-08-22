@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CopyData_AllProduts_From Byod_To_IRIS",
+				"name": "Copy_ProductType_From Byod_To_IRIS",
+				"description": "Load ProductType from Byod to IRIS database",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,13 +18,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select  * from dbo.AllProducts",
+						"sqlReaderQuery": "SELECT DISTINCT ProductType FROM dbo.AllPRoducts\nWHERE ProductType NOT IN ('FF&E' ,'') ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "delete from stg.AllProducts",
+						"preCopyScript": "delete from stg.Byod_ProductType",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
@@ -1120,7 +1121,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": "stg",
-							"table": "AllProducts"
+							"table": "Byod_ProductType"
 						}
 					}
 				]
