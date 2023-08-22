@@ -1,5 +1,5 @@
 {
-	"name": "PL_Load_AllProducts_BYOD_To_IRIS",
+	"name": "PL_Load_MasterTables_BYOD_To IRIS",
 	"properties": {
 		"activities": [
 			{
