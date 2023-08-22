@@ -52,6 +52,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ProductDescription",
+									"type": "String"
+								},
 								"sink": {
 									"name": "Description",
 									"type": "String",
@@ -91,7 +95,14 @@
 				"name": "Copy_ProductGroupID_From Byod_To_IRIS_copy1",
 				"description": "Load ProductGroupID from Byod to IRIS database",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy_ProductType_From Byod_To_IRIS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -128,13 +139,6 @@
 									"name": "ProductGroup",
 									"type": "String",
 									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "LoadDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
 								}
 							}
 						],
