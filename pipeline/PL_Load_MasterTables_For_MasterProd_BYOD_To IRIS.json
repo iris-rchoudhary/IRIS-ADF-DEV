@@ -176,7 +176,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT DISTINCT ManufacturerCode FROM dbo.AllPRoducts\nWHERE ManufacturerCode  <>''  ",
+						"sqlReaderQuery": "SELECT DISTINCT ManufacturerCode FROM dbo.AllPRoducts\nWHERE COMPANY='NOWH' AND ProductGroupId NOT IN ('FF&E' ,'')  \n AND  ManufacturerCode  <>'' AND ManufacturerCode  IS NOT NULL",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
