@@ -18,13 +18,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"additionalColumns": [
-							{
-								"name": "ProductDescription",
-								"value": "$$COLUMN:ProductType"
-							}
-						],
-						"sqlReaderQuery": "SELECT DISTINCT ProductType FROM dbo.AllPRoducts\nWHERE ProductType NOT IN ('FF&E' ,'') ",
+						"sqlReaderQuery": "SELECT DISTINCT ProductType FROM dbo.AllPRoducts\nWHERE COMPANY='NOWH' AND ProductGroupId NOT IN ('FF&E' ,'') \nAND ProductType IS NOT NULL AND ProductType <>''",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -47,17 +41,6 @@
 								},
 								"sink": {
 									"name": "ProductType",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "ProductDescription",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Description",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
