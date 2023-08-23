@@ -1,5 +1,5 @@
 {
-	"name": "DS_ZEUS",
+	"name": "ds_zeus",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_Azure_SQL_ZeusDev",

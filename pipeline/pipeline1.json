@@ -23,7 +23,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_ZEUS",
+						"referenceName": "ds_zeus",
 						"type": "DatasetReference"
 					}
 				]
