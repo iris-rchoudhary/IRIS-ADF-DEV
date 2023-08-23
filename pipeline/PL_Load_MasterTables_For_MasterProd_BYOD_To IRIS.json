@@ -310,6 +310,85 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy_ProductColorID_From Byod_To_IRIS",
+				"description": "Load ProductColorID from Byod to IRIS database",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy_BrandCode_From Byod_To_IRIS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT DISTINCT PRODUCTCOLORID FROM dbo.AllPRoducts\nWHERE  COMPANY='NOWH' AND ProductGroupId NOT IN ('FF&E' ,'')  \nAND PRODUCTCOLORID  <>'' AND PRODUCTCOLORID IS NOT NULL",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "delete from stg.Byod_ProductColor",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PRODUCTCOLORID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ProductColor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_byod",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "AllProducts"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "Byod_ProductColor"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
