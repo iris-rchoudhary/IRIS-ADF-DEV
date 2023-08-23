@@ -255,7 +255,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT DISTINCT BRANDCODE FROM dbo.AllPRoducts\nWHERE BRANDCODE  <>'' ",
+						"sqlReaderQuery": "SELECT DISTINCT BRANDCODE FROM dbo.AllPRoducts\nWHERE  COMPANY='NOWH' AND ProductGroupId NOT IN ('FF&E' ,'')  \nAND BRANDCODE  <>'' AND BRANDCODE IS NOT NULL",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
