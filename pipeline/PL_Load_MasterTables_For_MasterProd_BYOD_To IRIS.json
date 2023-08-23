@@ -97,7 +97,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT DISTINCT ProductGroupId FROM dbo.AllPRoducts\nWHERE ProductGroupId NOT IN ('FF&E' ,'') ",
+						"sqlReaderQuery": "SELECT DISTINCT ProductGroupId FROM dbo.AllPRoducts\nWHERE COMPANY='NOWH' AND ProductGroupId NOT IN ('FF&E' ,'') \nAND ProductGroupId IS NOT NULL \n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
