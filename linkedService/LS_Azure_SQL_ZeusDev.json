@@ -6,10 +6,10 @@
 		"type": "AzureSqlMI",
 		"typeProperties": {
 			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=no-zeusdev-sql.9b325c3e30f5.database.windows.net;initial catalog=ZeusColver;user id=noadmin",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1M2FhYzIwYi1iM2MyLTQ1ZDQtODI3Yi03MTI0MjFkNTZlMmQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4NmM1ZWM2Yy0zMDc2LTQ4YTMtYTU1YS04NzA4YWY0NWNkODIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "SH-IR-Zeus",
+			"referenceName": "SH-IR-Zeus-Working",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
