@@ -183,7 +183,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "delete [stg].[MasterLookupType]\n\nDBCC CHECKIDENT ('[stg].[MasterLookupType]', reseed,0)\n\nSET IDENTITY_INSERT stg.masterlookuptype OFF",
+						"preCopyScript": "\n\n",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
