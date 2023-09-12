@@ -124,30 +124,6 @@
 									"type": "Int64",
 									"physicalType": "bigint"
 								}
-							},
-							{
-								"source": {
-									"name": "SysStartTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								},
-								"sink": {
-									"name": "SysStartTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								}
-							},
-							{
-								"source": {
-									"name": "SysEndTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								},
-								"sink": {
-									"name": "SysEndTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								}
 							}
 						],
 						"typeConversion": true,
