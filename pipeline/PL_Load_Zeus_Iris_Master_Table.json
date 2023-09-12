@@ -29,7 +29,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "Truncate Table [stg].[MasterLookup]",
+						"preCopyScript": "delete [stg].[MasterLookup]",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -178,12 +178,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select \n\t[Type],\n    cast('1' as bit) as [IsEditableFromUI] ,\n\tcast('1' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\n\n\t  from MasterLookupType\n",
+						"sqlReaderQuery": "select id,\n\t[Type],\n    cast('1' as bit) as [IsEditableFromUI] ,\n\tcast('1' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\t  from MasterLookupType",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "Truncate Table [stg].[MasterLookupType]",
+						"preCopyScript": "delete [stg].[MasterLookupType]\ngo\nDBCC CHECKIDENT ('[stg].[MasterLookupType]', reseed,0)\ngo\nSET IDENTITY_INSERT stg.masterlookuptype OFF",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -192,6 +192,18 @@
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
+							{
+								"source": {
+									"name": "id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
 							{
 								"source": {
 									"name": "Type",
