@@ -194,6 +194,18 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
 									"name": "Type",
 									"type": "String",
 									"physicalType": "nvarchar"
