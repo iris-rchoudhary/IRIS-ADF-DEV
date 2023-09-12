@@ -323,7 +323,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[usp_load_master_data_type]"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_IRIS_SQL",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
