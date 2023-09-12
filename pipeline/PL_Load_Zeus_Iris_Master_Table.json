@@ -178,7 +178,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select id,\n\t[Type],\n    cast('1' as bit) as [IsEditableFromUI] ,\n\tcast('1' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\t  from MasterLookupType",
+						"sqlReaderQuery": "select cast(id as int) as id,\n\t[Type],\n    cast('1' as bit) as [IsEditableFromUI] ,\n\tcast('1' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\t  from MasterLookupType",
 						"partitionOption": "None"
 					},
 					"sink": {
