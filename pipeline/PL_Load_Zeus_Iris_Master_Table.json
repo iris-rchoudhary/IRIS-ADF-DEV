@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "SELECT [LookupTypeId] as masterlookuptypeid\n      ,[Code]\n      ,[Description]\n      ,999 as [SequenceNumber] \n\t  ,Cast('9' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\n      ,[SysStartTime]\n      ,[SysEndTime]\n  FROM [ZeusColver].[dbo].[MasterLookup]\n",
+						"sqlReaderQuery": "SELECT [LookupTypeId] as masterlookuptypeid\n      ,[Code]\n      ,[Description]\n      ,9 as [SequenceNumber] \n\t  ,Cast('9' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\n      ,[SysStartTime]\n      ,[SysEndTime]\n  FROM [ZeusColver].[dbo].[MasterLookup]\n",
 						"partitionOption": "None"
 					},
 					"sink": {
