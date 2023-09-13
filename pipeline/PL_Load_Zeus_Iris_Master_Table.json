@@ -1816,6 +1816,213 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "PaymentLimit",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "AppointmentType",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "SELECT [Name]\n      ,[MaximumNumberOfPayment]\n      ,[PercentOfCostNewOrder]\n      ,[PercentOfPriceNewOrder]\n      ,[PercentOfCostRemakeExchangeOrder]\n      ,[PercentOfPriceRemakeExchangeOrder]\n      ,[PercentOfCostWarrantyOrder]\n      ,[PercentOfPriceWarrantyOrder]\n      ,Cast('1' as bit) as [IsActive]\n      ,[CreatedBy]\n      ,[CreatedOn]\n      ,[ModifiedBy]\n  FROM [ZeusColver].[dbo].[PaymentLimit] ",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MaximumNumberOfPayment",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MaximumNumberOfPayment",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfCostNewOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfCostNewOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfPriceNewOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfPriceNewOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfCostRemakeExchangeOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfCostRemakeExchangeOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfPriceRemakeExchangeOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfPriceRemakeExchangeOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfCostWarrantyOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfCostWarrantyOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PercentOfPriceWarrantyOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PercentOfPriceWarrantyOrder",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IsActive",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IsActive",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_zeus",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "PaymentLimit"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "fnl",
+							"table": "PaymentLimit"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
