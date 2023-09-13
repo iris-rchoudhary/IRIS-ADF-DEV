@@ -1623,7 +1623,7 @@
 				]
 			},
 			{
-				"name": "User",
+				"name": "timezone",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -1736,11 +1736,11 @@
 				]
 			},
 			{
-				"name": "CompanyCategory_copy1",
+				"name": "user",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "User",
+						"activity": "timezone",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -1757,12 +1757,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select * from CompanyCategory",
+						"sqlReaderQuery": "SELECT * \n  FROM [ZeusColver].[dbo].[User]\n",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table stg.CompanyCategory",
+						"preCopyScript": "delete stg.User",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -1774,37 +1774,133 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Byte",
-									"physicalType": "tinyint"
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "FirstName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FirstName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MiddleName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "MiddleName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LastName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "LastName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GenderId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "GenderId",
 									"type": "Byte",
 									"physicalType": "tinyint"
 								}
 							},
 							{
 								"source": {
-									"name": "Code",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "DOB",
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
-									"name": "Code",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "DOB",
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							},
 							{
 								"source": {
-									"name": "Description",
+									"name": "UserName",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "Description",
+									"name": "UserName",
 									"type": "String",
 									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Email",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PayrollTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "PayrollTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "PayrollId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PayrollId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DefaultStoreId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DefaultStoreId",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
@@ -1821,142 +1917,338 @@
 							},
 							{
 								"source": {
-									"name": "StatusHotLineReceipt",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "PasswordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
 								},
 								"sink": {
-									"name": "StatusHotLineReceipt",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "PasswordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
 								}
 							},
 							{
 								"source": {
-									"name": "ReceiptMessage",
+									"name": "PayrollManagement",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "PayrollManagement",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "UserStatusTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "UserStatusTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "SaltedHash",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "ReceiptMessage",
+									"name": "SaltedHash",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "PaymentLImitId",
+									"name": "IsProfileLocked",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IsProfileLocked",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "LockedSince",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "LockedSince",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "LockedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "LockedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "LastSuccessfullLogin",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "LastSuccessfullLogin",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "FailedLoginAttempt",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "PaymentLImitId",
+									"name": "FailedLoginAttempt",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "RemoteEdgeLimit",
+									"name": "SecuritySalt",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SecuritySalt",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "NPINumber",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NPINumber",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LicenseNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "LicenseNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LicenseExpirationDate",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "LicenseExpirationDate",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "PasswordChangedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "PasswordChangedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "DefaultDistributionCenterId",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "RemoteEdgeLimit",
+									"name": "DefaultDistributionCenterId",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "CanTraceFrame",
+									"name": "AppClientId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "AppClientId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "PasswordExpiration",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "CanTraceFrame",
+									"name": "PasswordExpiration",
 									"type": "Boolean",
 									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "CanAcceptJob",
+									"name": "IsRdpOnly",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "CanAcceptJob",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "CanOnlyAcceptFinishLens",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "CanOnlyAcceptFinishLens",
+									"name": "IsRdpOnly",
 									"type": "Boolean",
 									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "CanAcceptNonFinishLensWithARC",
+									"name": "SetPassword",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "CanAcceptNonFinishLensWithARC",
+									"name": "SetPassword",
 									"type": "Boolean",
 									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "MaximumPartialRefundPercentage",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 15
+									"name": "IsPresaleDiscountAllowed",
+									"type": "Boolean",
+									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "MaximumPartialRefundPercentage",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 15
+									"name": "IsPresaleDiscountAllowed",
+									"type": "Boolean",
+									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "LensReplenishmentMinCost",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 18
+									"name": "IsAfterSaleDiscountAllowed",
+									"type": "Boolean",
+									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "LensReplenishmentMinCost",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 18
+									"name": "IsAfterSaleDiscountAllowed",
+									"type": "Boolean",
+									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "LensReplenishmentMinQuantity",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "CAQHNumber",
+									"type": "String",
+									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "LensReplenishmentMinQuantity",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "CAQHNumber",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ProviderTaxEntityId",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "ProviderTaxEntityId",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "MaterialTaxEntityId",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "MaterialTaxEntityId",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "IsSsoExempted",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IsSsoExempted",
+									"type": "Boolean",
+									"physicalType": "bit"
 								}
 							}
 						],
@@ -1973,7 +2265,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "dbo",
-							"TableName": "CompanyCategory"
+							"TableName": "User"
 						}
 					}
 				],
@@ -1983,7 +2275,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": "stg",
-							"table": "CompanyCategory"
+							"table": "User"
 						}
 					}
 				]
