@@ -1,0 +1,570 @@
+{
+	"name": "Pl_Load_Zeus_Iris_Staging",
+	"properties": {
+		"activities": [
+			{
+				"name": "masterlookuptype",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "select * from masterlookuptype",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table stg.masterlookuptype",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_zeus",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "masterlookuptype"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "masterlookuptype"
+						}
+					}
+				]
+			},
+			{
+				"name": "masterlookup",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "masterlookuptype",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "select * from masterlookup",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table stg.masterlookup\n",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "LookupTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "LookupTypeId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "Code",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Code",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Description",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Description",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_zeus",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "masterlookup"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "masterlookup"
+						}
+					}
+				]
+			},
+			{
+				"name": "appointmentstatus",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "masterlookup",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "select * from Appointmentstatus",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "Truncate table stg.Appointmentstatus",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_zeus",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "Appointmentstatus"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "Appointmentstatus"
+						}
+					}
+				]
+			},
+			{
+				"name": "appointmenttype",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "appointmentstatus",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "select * from AppointmentType",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table stg.AppointmentType",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SlotDuration",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "SlotDuration",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "BackgroundColor",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "BackgroundColor",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "RecordStatusId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CreatedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ModifiedBy",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IsVisibleOnWebScheduler",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IsVisibleOnWebScheduler",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "IsRevenue",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "IsRevenue",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_zeus",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "dbo",
+							"TableName": "AppointmentType"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_iris",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "stg",
+							"table": "AppointmentType"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy1_copy1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "appointmenttype",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"annotations": []
+	}
+}
