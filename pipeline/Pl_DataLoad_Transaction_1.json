@@ -1,34 +1,6 @@
 {
 	"name": "Pl_DataLoad_Transaction_1",
 	"properties": {
-		"activities": [
-			{
-				"name": "Script1",
-				"type": "Script",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"linkedServiceName": {
-					"referenceName": "LS_IRIS_SQL",
-					"type": "LinkedServiceReference"
-				},
-				"typeProperties": {
-					"scripts": [
-						{
-							"type": "Query",
-							"text": "\nALTER TABLE [fnl].[masterlookup]  WITH CHECK ADD  CONSTRAINT [FK_MasterLookup_MasterLookupTypeId_MasterLookupType] FOREIGN KEY([MasterLookupTypeId])\nREFERENCES [fnl].[masterlookuptype] ([Id])\n\nALTER TABLE [fnl].[masterlookup] CHECK CONSTRAINT [FK_MasterLookup_MasterLookupTypeId_MasterLookupType]\n\n\nALTER TABLE [fnl].[AppointmentStatus]  WITH CHECK ADD  CONSTRAINT [FK_AppointmentStatus_StatusStyleId] FOREIGN KEY([StatusStyleId])\nREFERENCES [fnl].[MasterLookup] ([Id])\n\nALTER TABLE [fnl].[AppointmentStatus] CHECK CONSTRAINT [FK_AppointmentStatus_StatusStyleId]\n\nALTER TABLE [fnl].[CompanyCategory]  WITH CHECK ADD  CONSTRAINT [FK_CompanyCategory_DefaultSoreExamRoomTypeId] FOREIGN KEY([DefaultSoreExamRoomTypeId])\nREFERENCES [fnl].[MasterLookup] ([Id])\n"
-						}
-					],
-					"scriptBlockExecutionTimeout": "02:00:00"
-				}
-			}
-		],
 		"annotations": []
 	}
 }
